@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -23,6 +24,18 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'] ], function(){
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    //  category route
+    Route::prefix('category')->group(function () {
+        Route::get('view', [CategoryController::class, 'view'])->name('category.view');
+        Route::post('store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+        Route::get('active/{id}', [CategoryController::class, 'active'])->name('category.active');
+        Route::get('inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
+    });
+
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user'] ], function(){

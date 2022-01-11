@@ -38,6 +38,8 @@
     <link href="{{ asset('admin') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('admin') }}/css/starlight.css">
+    <!-- toaster CSS -->
+    <link rel="stylesheet" href="{{ asset('common/toastr/toastr.css') }}">
 </head>
 
 <body>
@@ -75,6 +77,57 @@
     <script src="{{ asset('admin') }}/js/starlight.js"></script>
     <script src="{{ asset('admin') }}/js/ResizeSensor.js"></script>
     <script src="{{ asset('admin') }}/js/dashboard.js"></script>
+
+    {{-- toaster message start --}}
+    <script src="{{ asset('common/toastr/toastr.min.js') }}"></script>
+    <script>
+        @if(Session::has('message'))
+          var type ="{{Session::get('alert-type','info')}}"
+          switch(type){
+              case 'info':
+                  toastr.info(" {{Session::get('message')}} ");
+                  break;
+
+              case 'success':
+                  toastr.success(" {{Session::get('message')}} ");
+                  break;
+
+              case 'warning':
+                  toastr.warning(" {{Session::get('message')}} ");
+                  break;
+
+              case 'error':
+                  toastr.error(" {{Session::get('message')}} ");
+                  break;
+          }
+      @endif
+      </script>
+    {{-- toaster message end --}}
+
+    {{-- Sweetalert delete Message start --}}
+    <script src="{{ asset('common/sweetalert/sweetalert.min.js') }}"></script>
+    <script>
+        $(document).on("click", "#delete", function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+
+            swal({
+                    title: "Are you sure To Delete?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+
+                    }
+
+                });
+        });
+    </script>
+    {{-- Sweetalert delete Message end --}}
 </body>
 
 </html>
