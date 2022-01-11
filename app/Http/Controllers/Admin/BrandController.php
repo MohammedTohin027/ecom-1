@@ -29,9 +29,11 @@ class BrandController extends Controller
             'brand_image.required' => 'brand image field is required !',
         ]);
         if ($request->hasFile('brand_image')) {
-            $image = $request->brand_image;
+            $image = $request->file('brand_image');
             $image_ex = $image->getClientOriginalExtension();
-            $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
+            // $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
+            $name_gen = date('YmdHi').'.'.$image_ex;
+            // dd($name_gen);
             $save_url = 'upload/brands/'.$name_gen;
             Image::make($image)->resize(300,200)->save($save_url);
         }
