@@ -35,11 +35,17 @@
     <link href="{{ asset('admin') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="{{ asset('admin') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="{{ asset('admin') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+     {{-- data table start --}}
+     <link href="{{ asset('admin') }}/lib/highlightjs/github.css" rel="stylesheet">
+     <link href="{{ asset('admin') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
+     <link href="{{ asset('admin') }}/lib/select2/css/select2.min.css" rel="stylesheet">
+     {{-- data table end --}}
     <link href="{{ asset('admin') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('admin') }}/css/starlight.css">
     <!-- toaster CSS -->
     <link rel="stylesheet" href="{{ asset('common/toastr/toastr.css') }}">
+
 </head>
 
 <body>
@@ -65,6 +71,51 @@
     <script src="{{ asset('admin') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('admin') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('admin') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    {{-- image start --}}
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
+    {{-- image end --}}
+    {{-- data table js start --}}
+    <script src="{{ asset('admin') }}/lib/highlightjs/highlight.pack.js"></script>
+    <script src="{{ asset('admin') }}/lib/datatables/jquery.dataTables.js"></script>
+    <script src="{{ asset('admin') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="{{ asset('admin') }}/lib/select2/js/select2.min.js"></script>
+    <script>
+        $(function() {
+            'use strict';
+
+            $('#datatable1').DataTable({
+                responsive: true,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ items/page',
+                }
+            });
+
+            $('#datatable2').DataTable({
+                bLengthChange: false,
+                searching: false,
+                responsive: true
+            });
+
+            // Select2
+            $('.dataTables_length select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+        });
+    </script>
+    {{-- data table js end --}}
     <script src="{{ asset('admin') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="{{ asset('admin') }}/lib/d3/d3.js"></script>
     <script src="{{ asset('admin') }}/lib/rickshaw/rickshaw.min.js"></script>
@@ -81,27 +132,27 @@
     {{-- toaster message start --}}
     <script src="{{ asset('common/toastr/toastr.min.js') }}"></script>
     <script>
-        @if(Session::has('message'))
-          var type ="{{Session::get('alert-type','info')}}"
-          switch(type){
-              case 'info':
-                  toastr.info(" {{Session::get('message')}} ");
-                  break;
+        @if (Session::has('message'))
+            var type ="{{ Session::get('alert-type', 'info') }}"
+            switch(type){
+            case 'info':
+            toastr.info(" {{ Session::get('message') }} ");
+            break;
 
-              case 'success':
-                  toastr.success(" {{Session::get('message')}} ");
-                  break;
+            case 'success':
+            toastr.success(" {{ Session::get('message') }} ");
+            break;
 
-              case 'warning':
-                  toastr.warning(" {{Session::get('message')}} ");
-                  break;
+            case 'warning':
+            toastr.warning(" {{ Session::get('message') }} ");
+            break;
 
-              case 'error':
-                  toastr.error(" {{Session::get('message')}} ");
-                  break;
-          }
-      @endif
-      </script>
+            case 'error':
+            toastr.error(" {{ Session::get('message') }} ");
+            break;
+            }
+        @endif
+    </script>
     {{-- toaster message end --}}
 
     {{-- Sweetalert delete Message start --}}

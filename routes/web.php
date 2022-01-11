@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'] ], function
         Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
         Route::get('active/{id}', [CategoryController::class, 'active'])->name('category.active');
         Route::get('inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
+    });
+    //  brand route
+    Route::prefix('brand')->group(function () {
+        Route::get('view', [BrandController::class, 'view'])->name('brand.view');
+        Route::post('store', [BrandController::class, 'store'])->name('brand.store');
+        Route::get('edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+        Route::post('update/{id}', [BrandController::class, 'update'])->name('brand.update');
+        Route::get('delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+        Route::get('active/{id}', [BrandController::class, 'active'])->name('brand.active');
+        Route::get('inactive/{id}', [BrandController::class, 'inactive'])->name('brand.inactive');
     });
 
 });

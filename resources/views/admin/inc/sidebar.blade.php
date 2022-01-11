@@ -9,6 +9,12 @@
                 <span class="menu-item-label">Dashboard</span>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <a href="{{ route('brand.view') }}" class="sl-menu-link @yield('brand')">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-navigate-outline tx-22"></i>
+                <span class="menu-item-label">Brand</span>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
 
         <a href="#" class="sl-menu-link @yield('category-info')">
             <div class="sl-menu-item">
