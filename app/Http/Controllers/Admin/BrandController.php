@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 // use Intervention\Image\Facades\Image;
-use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\ImageManagerStatic as Image;
+
 
 class BrandController extends Controller
 {
@@ -36,8 +38,9 @@ class BrandController extends Controller
             $name_gen = date('YmdHi').'.'.$image_ex;
             // dd($name_gen);
             $save_url = 'upload/brands/'.$name_gen;
-            Image::configure(['driver' => 'imagick']);
-            Image::make($image)->resize(300,200)->save($save_url);
+            // Image::configure(['driver' => 'imagick']);
+            // Image::make($image)->resize(300,200)->save($save_url);
+            Image::make($image)->resize(300, 200)->save($save_url);
         }
         else{
             $save_url = 'upload/avater.jpg';
