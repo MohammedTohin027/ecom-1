@@ -36,6 +36,7 @@ class BrandController extends Controller
             $name_gen = date('YmdHi').'.'.$image_ex;
             // dd($name_gen);
             $save_url = 'upload/brands/'.$name_gen;
+            Image::configure(['driver' => 'imagick']);
             Image::make($image)->resize(300,200)->save($save_url);
         }
         else{
