@@ -83,7 +83,8 @@ class BrandController extends Controller
             }
             $image = $request->brand_image;
             $image_ex = $image->getClientOriginalExtension();
-            $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
+            // $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
+            $name_gen = date('YmdHi').'.'.$image_ex;
             $save_url = 'upload/brands/'.$name_gen;
             $image->move(public_path('upload/brands'),$name_gen);
             // Image::make($image)->resize(300,200)->save($save_url);
