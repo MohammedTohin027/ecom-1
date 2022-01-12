@@ -35,7 +35,7 @@ class BrandController extends Controller
             $image = $request->file('brand_image');
             $image_ex = $image->getClientOriginalExtension();
             // $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
-            $name_gen = date('YmdHi').'.'.$image_ex;
+            $name_gen = rand(0000, 9999).'.'.$image_ex;
             $save_url = 'upload/brands/'.$name_gen;
             $image->move(public_path('upload/brands'),$name_gen);
             // Image::configure(['driver' => 'imagick']);
@@ -84,7 +84,7 @@ class BrandController extends Controller
             $image = $request->brand_image;
             $image_ex = $image->getClientOriginalExtension();
             // $name_gen = octdec(uniqid()).dechex(uniqid()).'.'.$image_ex;
-            $name_gen = date('YmdHi').'.'.$image_ex;
+            $name_gen = rand(0000, 9999).'.'.$image_ex;
             $save_url = 'upload/brands/'.$name_gen;
             $image->move(public_path('upload/brands'),$name_gen);
             // Image::make($image)->resize(300,200)->save($save_url);
