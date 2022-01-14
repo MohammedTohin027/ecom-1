@@ -24,8 +24,8 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('category.view') }}" class="nav-link @yield('category')">Category</a></li>
-            <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
+            <li class="nav-item"><a href="{{ route('category.view') }}" class="nav-link @yield('category')">Category</a></li>            
+            <li class="nav-item"><a href="{{ route('sub-category.view') }}" class="nav-link @yield('sub-category')">Sub Category</a></li>            
         </ul>
 
     </div><!-- sl-sideleft-menu -->
