@@ -79,7 +79,7 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
         if ($request->hasFile('brand_image')) {
             if ($brand->brand_image != 'upload/avater.jpg') {
-                unlink($brand->brand_image);
+                @unlink($brand->brand_image);
             }
             $image = $request->brand_image;
             $image_ex = $image->getClientOriginalExtension();
@@ -137,7 +137,7 @@ class BrandController extends Controller
     public function delete($id){
         $brand = Brand::findOrFail($id);
         if ($brand->brand_image != 'upload/avater.jpg') {
-            unlink($brand->brand_image);
+            @unlink($brand->brand_image);
         }
         $brand->delete();
         $notification = [
